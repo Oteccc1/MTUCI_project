@@ -51,14 +51,11 @@ NAME = or_(
 )
 parser = Parser(NAME)
 
-FIRST = gram('Name')
-LAST = gram('Surn')
-MIDDLE = gram('Patr')
-ABBR = gram('Abbr')
 
-text = '1 599 059, 38 Евро, 420 долларов, 20 млн руб, 20 т. р., 881 913 (Восемьсот восемьдесят одна тысяча девятьсот тринадцать) руб. 98 коп.'
+text = ('1 599 059, 38 Евро, 420 долларов, 20 млн руб, 20 т. р., 881 913 '
+        '(Восемьсот восемьдесят одна тысяча девятьсот тринадцать) руб. 98 коп.')
 def findMoney(text):
-    #result = docx2txt.process(text)
+    #result = docx2txt.process(text)  возможность загрузить файл
     text = str(text)
     for money in list(money_extractor(text)):
       money = str(money.fact)
@@ -70,6 +67,7 @@ def findMoney(text):
       summ = money[indx1:indx2].lstrip().rstrip()
       valute = money[indx3:indx4].lstrip().rstrip()
       print('сумма:', summ, ',', 'валюта:', valute)
+#findMoney(text)
 
 
 text = '''Россия, Вологодская обл. г. Череповец, пр.Победы 93 б',
@@ -77,17 +75,18 @@ text = '''Россия, Вологодская обл. г. Череповец, �
    ул. Народного Ополчения д. 9к.3'''
 
 def findAdress(text):
-    #result = docx2txt.process(text)
-    text = str(str)
+    #result = docx2txt.process(text)   возможность загрузить файл
+    text = str(text)
     for addr in list(addr_extractor(text)):
         print(addr.fact)
+#findAdress(text)
+
 
 
 dateFile = "file.docx"
 def findDate(nameOfFile):
     result = docx2txt.process(nameOfFile)
     text = str(result)
-
     sp_date = []
     for date in list(dates_extractor(text)):
         date = str(date.fact)
@@ -113,6 +112,9 @@ def findDate(nameOfFile):
                 print(*sp[0], ':',   *sp_date[num])
                 num += 1
 
+
+#findDate(dateFile)
+
 def findNames(nameOfFile):
     result = docx2txt.process(nameOfFile)
     text = str(result)
@@ -127,7 +129,7 @@ def findNames(nameOfFile):
            print(name)
 
 
-findNames(dateFile)
+#findNames(dateFile)
 
 
 
